@@ -11,6 +11,14 @@ model_id = os.getenv('MODEL_ID', "ctron.fritzbox.status:1.0.0")
 device_id = quote(os.environ['DEVICE_ID'])
 
 endpoint = os.environ['ENDPOINT']
+endpoint_user = os.environ['ENDPOINT_USER']
+endpoint_password = os.environ['ENDPOINT_PASSWORD']
+
+if endpoint_user is not None and endpoint_password is not None:
+    auth = (endpoint_user, endpoint_password)
+else:
+    auth = None
+
 path = f"/publish/{device_id}/status"
 query = "?" + urlencode(dict(model_id=model_id))
 url = urljoin(endpoint, path + query)
@@ -28,7 +36,7 @@ while True:
         "bytes_sent": fc.bytes_sent
     }
     print(json.dumps(status))
-    res = requests.post(url, json=status, headers={"Content-Type": "application/json"})
+    res = requests.post(url, json=status, auth=auth, headers={"Content-Type": "application/json"})
     print(res)
 
     time.sleep(2)
