@@ -13,8 +13,8 @@ model_id = os.getenv('MODEL_ID', "ctron.fritzbox.status:1.0.0")
 device_id = quote(os.environ['DEVICE_ID'])
 
 endpoint = os.environ['ENDPOINT']
-endpoint_user = os.environ['ENDPOINT_USER']
-endpoint_password = os.environ['ENDPOINT_PASSWORD']
+endpoint_user = os.getenv('ENDPOINT_USER')
+endpoint_password = os.getenv('ENDPOINT_PASSWORD')
 
 print(endpoint)
 
