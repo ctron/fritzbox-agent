@@ -7,12 +7,16 @@ from urllib.parse import urljoin, urlencode, quote
 
 from fritzconnection.lib.fritzstatus import FritzStatus
 
+print("Starting up...")
+
 model_id = os.getenv('MODEL_ID', "ctron.fritzbox.status:1.0.0")
 device_id = quote(os.environ['DEVICE_ID'])
 
 endpoint = os.environ['ENDPOINT']
 endpoint_user = os.environ['ENDPOINT_USER']
 endpoint_password = os.environ['ENDPOINT_PASSWORD']
+
+print(endpoint)
 
 if endpoint_user is not None and endpoint_password is not None:
     auth = (endpoint_user, endpoint_password)
