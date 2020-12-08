@@ -4,6 +4,18 @@ This is a small agent, publishing network traffic information to a [Drogue IoT](
 
 ## Installing
 
+* Install Podman
+
+  * Fedora:
+    ~~~shell
+    sudo dnf -y install podman
+    ~~~
+
+  * Ubuntu 20.10 (including Raspberry Pi 3/4):
+    ~~~shell
+    sudo apt -y install podman runc
+    ~~~
+
 * Create a systemd unit (`/etc/systemd/system/fritzbox-agent.service`):
 
   ~~~ini
