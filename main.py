@@ -3,27 +3,25 @@ import os
 import json
 import math
 import requests
-from urllib.parse import urljoin, urlencode, quote
+from urllib.parse import urljoin, urlencode, quote, quote_plus
 
 from fritzconnection.lib.fritzstatus import FritzStatus
 
 print("Starting up...")
 
 model_id = os.getenv('MODEL_ID', "ctron.fritzbox.status:1.0.0")
+
+app_id = os.getenv('APP_ID')
 device_id = quote(os.environ['DEVICE_ID'])
+device_password = os.getenv('DEVICE_PASSWORD')
 
 endpoint = os.environ['ENDPOINT']
-endpoint_user = os.getenv('ENDPOINT_USER')
-endpoint_password = os.getenv('ENDPOINT_PASSWORD')
-
 print(endpoint)
 
-if endpoint_user is not None and endpoint_password is not None:
-    auth = (endpoint_user, endpoint_password)
-else:
-    auth = None
+denc = quote_plus(device_id)
+auth = (f"{denc}@{app_id}", device_password)
 
-path = f"/publish/{device_id}/status"
+path = f"/v1/status"
 query = "?" + urlencode(dict(model_id=model_id))
 url = urljoin(endpoint, path + query)
 
