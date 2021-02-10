@@ -25,7 +25,7 @@ This is a small agent, publishing network traffic information to a [Drogue IoT](
   [Service]
   Restart=on-failure
   ExecStartPre=/usr/bin/rm -f /%t/%n-pid /%t/%n-cid
-  ExecStart=/usr/bin/podman run --conmon-pidfile /%t/%n-pid --cidfile /%t/%n-cid -e PASSWORD=fritzbox-password -e DEVICE_ID=device -e ENDPOINT_USER=device -e ENDPOINT_PASSWORD=device12 -e ENDPOINT=https://http-endpoint-drogue-iot.apps.your.cluster.tld -d ghcr.io/ctron/fritzbox-agent:latest
+  ExecStart=/usr/bin/podman run --rm --conmon-pidfile /%t/%n-pid --cidfile /%t/%n-cid -e PASSWORD=fritzbox-password -e DEVICE_ID=device -e ENDPOINT_USER=device -e ENDPOINT_PASSWORD=device12 -e ENDPOINT=https://http-endpoint-drogue-iot.apps.your.cluster.tld -d ghcr.io/ctron/fritzbox-agent:latest
   ExecStop=/usr/bin/sh -c "/usr/bin/podman rm -f `cat /%t/%n-cid`"
   KillMode=none
   Type=forking
