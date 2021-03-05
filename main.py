@@ -40,5 +40,6 @@ while True:
     print(json.dumps(status))
     res = requests.post(url, json=status, auth=auth, headers={"Content-Type": "application/json"})
     print(res)
+    print(res.content)
 
     time.sleep(2)
