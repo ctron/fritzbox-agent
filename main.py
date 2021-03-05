@@ -9,7 +9,7 @@ from fritzconnection.lib.fritzstatus import FritzStatus
 
 print("Starting up...")
 
-model_id = os.getenv('MODEL_ID', "ctron.fritzbox.status:1.0.0")
+data_schema = os.getenv('DATA_SCHEMA', "vorto:ctron.fritzbox.status:1.0.0")
 
 app_id = os.getenv('APP_ID')
 device_id = quote(os.environ['DEVICE_ID'])
@@ -22,7 +22,7 @@ denc = quote_plus(device_id)
 auth = (f"{denc}@{app_id}", device_password)
 
 path = f"/v1/status"
-query = "?" + urlencode(dict(model_id=model_id))
+query = "?" + urlencode(dict(data_schema=data_schema))
 url = urljoin(endpoint, path + query)
 
 print(url)
